@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui.form小例子</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../layui/layui.js"></script>
+</head>
+<body>
+<form class="layui-form"  action="/add.do"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" name="rname" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="0" title="男">
+            <input type="radio" name="sex" value="1" title="女" checked>
+        </div>
+    </div>
+
+    <div class="layui-upload">
+        <label class="layui-form-label"></label>
+        <button type="button" class="layui-btn" id="test1">上传图片</button>
+        <div class="layui-upload-list">
+            <label class="layui-form-label">证件</label>
+            <img class="layui-upload-img" id="deme1" style="width: 100px;height: 100px">
+            <p id="demoText"></p>
+            <input type="hidden" id="tx" name="filename">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职位</label>
+        <input type="checkbox" name="pid" value="1" title="经理" lay-skin="primary" checked>
+        <input type="checkbox" name="pid" value="2" title="销售经理" lay-skin="primary">
+        <input type="checkbox" name="pid" value="3" title="部门经理" lay-skin="primary">
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">部门</label>
+        <div class="layui-input-block">
+            <select name="sid" id="sid" lay-filter="aihao">
+                <option value="1">销售部门</option>
+                <option value="2">人事部门</option>
+                <option value="3">开发部门</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">身份证</label>
+        <div class="layui-input-block">
+            <input type="text" name="card" placeholder="请输入" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="sub">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+<script>
+    layui.use(['form','upload','jquery'], function(){
+        var $=layui.jquery;
+        var upload=layui.upload;
+        var form = layui.form;
+        form.on('submit(sub)', function(data){
+            //当你在iframe页面关闭自身时
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+        });
+
+
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/imgag.do' //改成您自己的上传接口
+            ,before: function(obj){
+                obj.preview(function(index, file, result){
+                    $('#deme1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                if(res.code ==200){
+                    $("#tx").val(res.data)
+                    alert("图片路径："+$("#tx").val())
+                    layer.msg('上传成功');
+
+                }
+                //上传成功
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

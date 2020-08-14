@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link rel="stylesheet" href="../layui/css/layui.css" media="all">
+<script src="../layui/layui.js"></script>
+<body>
+
+
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">权限管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="1.html" target="right">主页</a></dd>
+                        <dd><a href="role.html" target="right">查询角色</a></dd>
+                        <dd><a href="javascript:;">添加权限</a></dd>
+                        <dd><a href="">查询权限</a></dd>
+                        <dd><a href="">添加权限</a></dd>
+                        <dd><a href="user.html" target="right">查询用户</a></dd>
+                        <dd><a href="">用户添加角色</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">发布商品</a></li>
+            </ul>
+        </div>
+    </div>
+
+<script src="//res.layui.com/layui/src/layui.js?t=1594038786020" charset="utf-8"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?d214947968792b839fd669a4decaaffc";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>

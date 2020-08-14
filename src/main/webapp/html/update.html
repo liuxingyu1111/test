@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>update</title>
+</head>
+<body>
+<form action="/update2.do" method="post">
+    id<input type="text" name="id" th:value="${li.id}"/>
+    姓名<input type="text" name="rname" th:value="${li.rname}"/>
+    <!--<c:choose>
+        <c:when test="${li.sex.equals('男') }">
+            男<input type="radio" value="男" id="sex" checked="checked" name="sex" />
+            女<input type="radio" value="女" id="sex1" name="sex"/><br>
+        </c:when>
+        <c:otherwise>
+            男<input type="radio" value="男" id="sex"  name="sex" />
+            女<input type="radio" value="女" id="sex1" checked="checked" name="sex"/><br>
+        </c:otherwise>
+    </c:choose>-->
+    <img th:src="${'/image/'+li.file}"  style="width:30px; height:30px; border-radius:50%;"/>
+    <input type="file" name="file">
+    职位<input type="text" name="pid" value="${li.pid}">
+    部门<select name="sid" id="sid">
+    <option th:value="${li.sid}">[[${li.sid}]]</option>
+    <option value="1">销售部</option>
+    <option value="2">研发部</option>
+    <option value="3">人事部</option>
+</select>
+    <input type="hidden" name="_method" value="PUT">
+    <input type="submit" value="修改">
+</form>
+</body>
+</html>

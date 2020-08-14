@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add</title>
+</head>
+<body>
+<form action="/addstu.do" enctype="multipart/form-data" method="post">
+    id<input type="text" name="id"><br>
+    名字:<input type="text" name="rname"/><br>
+    男<input type="radio" value="男" name="sex"/>
+    女<input type="radio" value="女" name="sex"><br>
+    <input type="file" name="filename">
+    职位<input type="text" name="pid"><br>
+    部门<select name="sid" id="sid">
+    <option value="1">销售部</option>
+    <option value="2">人事部</option>
+    <option value="3">开发部</option>
+</select><br>
+    身份证<input type="text" name="card">
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

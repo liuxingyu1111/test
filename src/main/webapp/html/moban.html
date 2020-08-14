@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="html/add.html">添加</a>
+<table border="1">
+    <tr>
+        <td>编号</td>
+        <td>姓名</td>
+        <td>性别</td>
+        <td>证件</td>
+        <td>职位</td>
+        <td>部门</td>
+        <td>身份证</td>
+        <td>功能</td>
+    </tr>
+        <tr th:each="li:${list}">
+            <td th:text="${li.id}"></td>
+            <td th:text="${li.rname}"></td>
+            <td th:text="${li.sex}"></td>
+            <td><img th:src="${'/image/'+li.file}" style="width:30px; height:30px; border-radius:50%;"/></td>
+            <td th:text="${li.pid}"></td>
+            <td th:text="${li.sid}"></td>
+            <td th:text="${li.card}"></td>
+            <td>
+                <form th:action="@{/delect.do(id=${li.id})}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="submit" value="删除"/>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/update.do}" method="get">
+                    <input type="hidden" name="id" th:value="${li.id}">
+                    <input type="submit" value="修改"/>
+                </form>
+            </td>
+        </tr>
+    <!--<a th:href="@{/delect/id(id=${li.id}.do)}">编辑</a>-->
+    <!--<a th:href="@{/update/{id}(id=${li.id}.do)}">删除</a>-->
+</table>
+</body>
+</html>

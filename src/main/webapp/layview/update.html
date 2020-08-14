@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+</head>
+<script src="../layui/layui.js"></script>
+<!--<script>
+    //Demo
+    layui.use(['form','upload','jquery'], function(){
+        var form = layui.form;
+        var $=layui.jquery;//异步
+        var upload=layui.upload;
+
+        //普通图片上传
+        var uploadInst= upload.render({
+            elem: '#test1'
+            ,url: '/imgag.do' //改成您自己的上传接口
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //上传成功
+                if(res.code == "0"){
+                    console.log(res.data);
+                    $("#files").val(res.data);
+                    layer.msg("上传成功",{icon:6});//笑脸
+                }else{
+                    layer.msg("上传失败",{icon:5});
+                }
+
+            }
+
+        });
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            var index= parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+        });
+    });
+</script>-->
+<body >
+<br>
+<form class="layui-form"  method=POST enctype=multipart/form-data  action="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入名称</label>
+        <input type="hidden" name="id" th:value="${li.id}">
+        <div class="layui-input-block">
+            <input type="text" name="rname"   th:value="${li.rname}"  required  lay-verify="required"  autocomplete="off" class="layui-input" style="width: 400px;height: 40px">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">单选框</label>
+        <div class="layui-input-block">
+            <input type="radio" name="sex" value="男" title="男" th:checked="${li.sex=='男'?true:false}">
+            <input type="radio" name="sex" value="女" title="女" th:checked="${li.sex=='女'?true:false}">
+        </div>
+    </div>
+
+    <!--<div class="layui-form-item">
+        <label class="layui-form-label">选择班级</label>
+        <div class="layui-input-block" style="width: 400px;height: 40px">
+            <select name="city" lay-verify="required" >
+                <option   th:each="li:${list}"  th:value="${li.classid}" th:selected="${li.classid==stu.classid?true:false}">[[${li.cname}]]</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">职位选择</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="happy"
+                   th:each="ha:${happys}"
+                   th:value="${ha}"
+                   th:checked="${#strings.contains(stu.happy,ha)}"
+                   th:title="${ha}"
+            />
+
+        </div>
+    </div>-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">上传图片</label>
+        <input type="hidden" name="file" id="filename">
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <img class="layui-upload-img" id="demo1" th:src="${li.file}"   style="width: 100px;height: 100px">
+            <p id="demoText"></p >
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

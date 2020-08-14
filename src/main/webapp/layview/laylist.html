@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>table模块快速使用</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../layui/layui.js"></script>
+
+
+</head>
+<body>
+
+<div class="demoTable">
+    搜索ID：
+    <div class="layui-inline">
+        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
+</div>
+
+<table class="layui-hide" id="LAY_table_user" lay-filter="user"></table>
+
+
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //方法级渲染
+        table.render({
+            elem: '#LAY_table_user'
+            ,url: '/laylist.do'
+            ,cols: [[
+                {checkbox: true, fixed: true}
+                ,{field: 'id', title: 'ID', width:80, sort: true,fixed:true}
+                ,{field: 'rname', title: '用户名', width:80}
+                ,{field: 'sex', title: '性别', width:180, sort: true}
+                ,{field:'file',templet:function(d){
+                        return '<div><img style="height: 100px" src='+/image/+d.file+'></div>'
+                    },title:"证件",width:133
+                }
+                ,{field: 'pid', title: '职位', width: 177}
+                ,{field: 'sid', title: '部门', width: 180,templet:'<div>{{d.rolesection.section}}</div>'}
+                ,{field: 'card',title:'身份证',width:180}
+                ,{field:'',title:'功能',width:180 ,align:'center', toolbar: '#barDemo'}
+            ]]
+            ,id: 'testReload'
+            ,page: true
+            ,height: 310
+        });
+
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    page: {
+                        curr: 1 //重新从第 1 页开始
+                    }
+                    ,where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</body>
+</html>

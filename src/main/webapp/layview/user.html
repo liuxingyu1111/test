@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+    <script src="../layui/layui.js"></script>
+</head>
+<body>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            ,height:412
+            ,url: '/userr.do' //数据接口
+            ,page: true //开启分页
+            ,cols: [[ //表头
+                {field: 'username', title:"用户", width:160}
+                ,{field: 'password', title:"密码", width:160}
+            ]]
+        });
+
+    });
+</script>
+<table id="demo" lay-filter="test"></table>
+</body>
+</html>
